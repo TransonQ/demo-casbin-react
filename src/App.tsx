@@ -1,13 +1,15 @@
-import { useCallback, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import { CasbinDemo } from './CasbinDemo'
+import { useAuthStore } from './useAuthStore'
 
 function App() {
-  const [user, setUser] = useState('bob')
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    setUser(event.target.value)
-    console.log(`App user ${event.target.value}`)
-  }, [])
+  const { user, setUser } = useAuthStore()
+
+  useEffect(() => {
+    /** 初始化角色 */
+    setUser('bob')
+  }, [setUser])
 
   return (
     <div className='w-lg mx-auto flex flex-col items-center justify-center h-screen gap-2'>
@@ -15,7 +17,9 @@ function App() {
       <select
         className='w-1/2 mb-12'
         value={user}
-        onChange={handleChange}
+        onChange={(event) => {
+          setUser(event.target.value)
+        }}
       >
         <option value='alice'>Alice</option>
         <option value='bob'>Bob</option>
