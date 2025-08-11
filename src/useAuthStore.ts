@@ -13,7 +13,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   auth: undefined,
   user: undefined,
   setUser: (user) => {
-    console.log('user: ', user);
     const auth = new Authorizer('manual')
     auth.setPermission((permissions as any)[user])
     set({ user, auth })
