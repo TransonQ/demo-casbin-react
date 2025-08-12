@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import { CasbinDemo } from './CasbinDemo'
-
 import { useFetchAuth } from './hooks/useFetchAuth'
 import { Resources } from './components/Resources'
 

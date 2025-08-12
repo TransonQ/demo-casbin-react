@@ -1,19 +1,21 @@
 import { create } from 'zustand'
 import { Authorizer } from 'casbin.js'
 
-interface AuthState {
+interface AuthStore {
   auth: Authorizer | undefined
-  setAuth: (permissions: any) => void
-  authCheck: (act: string, obj: string) => boolean
+  /** 初始化权限 */
+  initAuth: (permissions: any) => void
+  /** 检查权限 */
+  checkAuth: (act: string, obj: string) => boolean
 }
 
-export const useAuthStore = create<AuthState>()((set, get) => ({
+export const useAuthStore = create<AuthStore>()((set, get) => ({
   auth: undefined,
-  setAuth: (permissions) => {
+  initAuth: (permissions) => {
     const auth = new Authorizer('manual')
     auth.setPermission(permissions)
     set({ auth })
   },
-  authCheck: (act: string, obj: string) =>
+  checkAuth: (act: string, obj: string) =>
     get().auth?.permission?.check(act, obj) ?? false,
 }))

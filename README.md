@@ -73,6 +73,8 @@ pnpm build
 - 用户角色选择：支持选择不同角色（Alice、Bob、Administrator）。
 - 权限管理：通过 Casbin 实现基于角色的权限控制。
 - 响应式设计：使用 TailwindCSS 提供现代化的样式支持。
+- 异步状态: 使用 swr 管理
+- 全局状态: 使用 zustand 管理
 
 ## 技术栈
 

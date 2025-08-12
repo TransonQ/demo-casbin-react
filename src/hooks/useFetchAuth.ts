@@ -3,9 +3,10 @@ import { getMockPermissions } from '../utils/mock'
 import { useEffect } from 'react'
 import { useAuthStore } from './useAuthStore'
 
+/** 获取并初始化权限配置 */
 export function useFetchAuth() {
   const swrKey = { key: 'FetchAuth' }
-  const { setAuth } = useAuthStore()
+  const { initAuth } = useAuthStore()
 
   const {
     data: response,
@@ -18,9 +19,9 @@ export function useFetchAuth() {
 
   useEffect(() => {
     if (response) {
-      setAuth(response)
+      initAuth(response)
     }
-  }, [setAuth, response])
+  }, [initAuth, response])
 
   return { response, isLoading, isValidating, mutate }
 }

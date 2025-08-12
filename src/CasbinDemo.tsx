@@ -3,14 +3,14 @@ import { useAuthStore } from './hooks/useAuthStore'
 import { Badge } from './components/Badge'
 
 export function CasbinDemo({ resource }: { resource: string }) {
-  const { authCheck } = useAuthStore()
+  const { checkAuth } = useAuthStore()
 
   useEffect(() => {}, [])
   return (
     <>
       <span>权限状态</span>
       <span className='flex flex-col gap-2'>
-        {authCheck('list', resource) ? (
+        {checkAuth('list', resource) ? (
           <span>
             <Badge status='success'>Authorized LIST</Badge> {resource}
           </span>
@@ -19,7 +19,7 @@ export function CasbinDemo({ resource }: { resource: string }) {
             <Badge status='error'>Unauthorized LIST</Badge> {resource}
           </span>
         )}
-        {authCheck('get', resource) ? (
+        {checkAuth('get', resource) ? (
           <span>
             <Badge status='success'>Authorized GET</Badge> {resource}
           </span>
