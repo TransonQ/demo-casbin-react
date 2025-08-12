@@ -13,18 +13,21 @@ export function useFetchAuth() {
     isValidating,
     mutate,
   } = useSWR(swrKey, fetchers, {
-    revalidateOnFocus: false,
-    refreshInterval: 0,
+    refreshInterval: 10_000,
   })
 
   useEffect(() => {
-    console.log('response: ', response)
-    setAuth(response)
+    if (response) {
+      setAuth(response)
+    }
   }, [setAuth, response])
 
   return { response, isLoading, isValidating, mutate }
 }
 
 async function fetchers() {
-  return await getMockPermissions()
+  const res = await getMockPermissions()
+  const formattedTime = new Date().toLocaleString()
+  console.log(`[${formattedTime}]`, res)
+  return res
 }
