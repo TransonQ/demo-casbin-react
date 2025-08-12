@@ -1,8 +1,11 @@
 import useSWR from 'swr'
 import { getMockPermissions } from '../utils/mock'
+import { useEffect } from 'react'
+import { useAuthStore } from './useAuthStore'
 
 export function useFetchAuth() {
   const swrKey = { key: 'FetchAuth' }
+  const { setAuth } = useAuthStore()
 
   const {
     data: response,
@@ -13,6 +16,11 @@ export function useFetchAuth() {
     revalidateOnFocus: false,
     refreshInterval: 0,
   })
+
+  useEffect(() => {
+    console.log('response: ', response)
+    setAuth(response)
+  }, [setAuth, response])
 
   return { response, isLoading, isValidating, mutate }
 }

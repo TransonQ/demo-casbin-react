@@ -1,14 +1,23 @@
+import { useEffect } from 'react'
 import { useAuthStore } from './hooks/useAuthStore'
+import { Badge } from './components/Badge'
 
-export function CasbinDemo({ target }: { target: string }) {
+export function CasbinDemo({ resource }: { resource: string }) {
   const { authCheck } = useAuthStore()
 
+  useEffect(() => {}, [])
   return (
     <>
-      <span>App</span>
+      <span>权限状态</span>
       <span className='flex flex-col gap-2'>
-        {authCheck('read', target) && (
-          <span className='text-orange-600 font-bold'>Authorized {target}</span>
+        {authCheck('list', resource) ? (
+          <span>
+            <Badge status='success'>Authorized</Badge> {resource}
+          </span>
+        ) : (
+          <span>
+            <Badge status='error'>Unauthorized</Badge> {resource}
+          </span>
         )}
       </span>
     </>
