@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className='w-lg mx-auto flex flex-col items-center justify-center h-screen gap-12'>
-      <CasbinDemo resource={resource} />
+      <CasbinDemo />
 
       <Resources
         value={resource}

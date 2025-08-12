@@ -1,21 +1,30 @@
+// src/store/authStore.ts
 import { create } from 'zustand'
-import { Authorizer } from 'casbin.js'
+import { newEnforcer, newModel, Enforcer } from 'casbin'
 
-interface AuthStore {
-  auth: Authorizer | undefined
-  /** 初始化权限 */
-  initAuth: (permissions: any) => void
-  /** 检查权限 */
-  checkAuth: (act: string, obj: string) => boolean
+interface AuthState {
+  enforcer: Enforcer | null
+  initEnforcer: (res: { model: string; policy: string[][] }) => Promise<void>
+  can: (sub: string, obj: string, act: string) => Promise<boolean>
 }
 
-export const useAuthStore = create<AuthStore>()((set, get) => ({
-  auth: undefined,
-  initAuth: (permissions) => {
-    const auth = new Authorizer('manual')
-    auth.setPermission(permissions)
-    set({ auth })
+export const useAuthStore = create<AuthState>((set, get) => ({
+  enforcer: null,
+
+  initEnforcer: async (res) => {
+    const model = newModel(res.model)
+    const enforcer = await newEnforcer(model)
+
+    for (const p of res.policy) {
+      await enforcer.addPolicy(...p)
+    }
+
+    set({ enforcer })
   },
-  checkAuth: (act: string, obj: string) =>
-    get().auth?.permission?.check(act, obj) ?? false,
+
+  can: async (sub, obj, act) => {
+    const e = get().enforcer
+    if (!e) return false
+    return e.enforce(sub, obj, act)
+  },
 }))
