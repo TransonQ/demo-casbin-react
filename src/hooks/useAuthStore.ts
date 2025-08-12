@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import permissions from './permissions.json'
+import permissions from '../permissions.json'
 import { Authorizer } from 'casbin.js'
 
 interface AuthState {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { CasbinDemo } from './CasbinDemo'
-import { useAuthStore } from './useAuthStore'
+import { useAuthStore } from './hooks/useAuthStore'
 
 function App() {
   const { user, setUser } = useAuthStore()
