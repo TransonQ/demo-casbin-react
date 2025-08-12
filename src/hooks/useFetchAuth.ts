@@ -8,13 +8,8 @@ export function useFetchAuth() {
   const swrKey = { key: 'FetchAuth' }
   const { initAuth } = useAuthStore()
 
-  const {
-    data: response,
-    isLoading,
-    isValidating,
-    mutate,
-  } = useSWR(swrKey, fetchers, {
-    refreshInterval: 10_000,
+  const { data: response } = useSWR(swrKey, fetchers, {
+    refreshInterval: 10_000, // 10 秒自动刷新
   })
 
   useEffect(() => {
@@ -23,7 +18,7 @@ export function useFetchAuth() {
     }
   }, [initAuth, response])
 
-  return { response, isLoading, isValidating, mutate }
+  return { response }
 }
 
 async function fetchers() {
