@@ -38,7 +38,11 @@ const port = 7001;
       permMap[sub][obj].push(act);
     }
 
-    res.json(permMap);
+    // 返回符合 CasbinJsGetPermissionForUser 的格式
+    res.json({
+      other: 'other',
+      data: permMap[sub],
+    });
   });
 
   app.listen(port, () => {
