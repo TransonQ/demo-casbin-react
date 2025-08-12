@@ -1,3 +1,4 @@
+/** 测试指定资源的权限 */
 const options = [
   { value: '', label: '' },
   { value: 'audit.vastai.io/traces', label: '审计列表' },
@@ -13,23 +14,21 @@ export function Resources({
   onChange: (value: string) => void
 }) {
   return (
-    <>
-      <select
-        className='w-1/2 mb-12 border rounded-lg'
-        value={value}
-        onChange={(event) => {
-          onChange(event.target.value)
-        }}
-      >
-        {options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-          >
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </>
+    <select
+      className='w-1/2 border rounded-lg'
+      value={value}
+      onChange={(event) => {
+        onChange(event.target.value)
+      }}
+    >
+      {options.map((option) => (
+        <option
+          key={option.value}
+          value={option.value}
+        >
+          {option.label}
+        </option>
+      ))}
+    </select>
   )
 }

@@ -12,11 +12,20 @@ export function CasbinDemo({ resource }: { resource: string }) {
       <span className='flex flex-col gap-2'>
         {authCheck('list', resource) ? (
           <span>
-            <Badge status='success'>Authorized</Badge> {resource}
+            <Badge status='success'>Authorized LIST</Badge> {resource}
           </span>
         ) : (
           <span>
-            <Badge status='error'>Unauthorized</Badge> {resource}
+            <Badge status='error'>Unauthorized LIST</Badge> {resource}
+          </span>
+        )}
+        {authCheck('get', resource) ? (
+          <span>
+            <Badge status='success'>Authorized GET</Badge> {resource}
+          </span>
+        ) : (
+          <span>
+            <Badge status='error'>Unauthorized GET</Badge> {resource}
           </span>
         )}
       </span>
