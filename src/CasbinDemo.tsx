@@ -1,11 +1,24 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useAuthStore } from './hooks/useAuthStore'
 import { Badge } from './components/Badge'
+import { Authorizer } from 'casbin.js'
 
 export function CasbinDemo({ resource }: { resource: string }) {
   const { checkAuth } = useAuthStore()
 
-  useEffect(() => {}, [])
+  const autoAuth = useCallback(async () => {
+    const auth = new Authorizer('auto', {
+      endpoint: ' http://localhost:7001/casbin',
+    })
+    auth.setUser('alice')
+    const res = await auth.can('read', 'data1')
+    console.log('res: ', res)
+  }, [])
+
+  useEffect(() => {
+    autoAuth()
+  }, [autoAuth])
+
   return (
     <>
       <span>权限状态</span>

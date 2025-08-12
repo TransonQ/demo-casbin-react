@@ -23,7 +23,5 @@ export function useFetchAuth() {
 
 async function fetchers() {
   const res = await getMockPermissions()
-  const formattedTime = new Date().toLocaleString()
-  console.log(`[${formattedTime}]`, res)
   return res
 }

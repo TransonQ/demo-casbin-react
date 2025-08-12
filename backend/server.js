@@ -1,8 +1,9 @@
 import express from 'express';
 import { newEnforcer, newModel } from 'casbin';
-
+import cors from 'cors';
 const app = express();
 const port = 7001;
+app.use(cors());
 
 (async () => {
   const modelText = `
@@ -39,10 +40,7 @@ const port = 7001;
     }
 
     // 返回符合 CasbinJsGetPermissionForUser 的格式
-    res.json({
-      other: 'other',
-      data: permMap[sub],
-    });
+    res.json(permMap[sub]);
   });
 
   app.listen(port, () => {
