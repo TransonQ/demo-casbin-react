@@ -1,17 +1,14 @@
 import { useAuthStore } from './hooks/useAuthStore'
 
-export function CasbinDemo({ user }: { user?: string }) {
+export function CasbinDemo({ target }: { target: string }) {
   const { authCheck } = useAuthStore()
 
   return (
     <>
-      <span>User: {user}</span>
+      <span>App</span>
       <span className='flex flex-col gap-2'>
-        {authCheck('read', 'alice_data') && (
-          <span className='text-orange-600 font-bold'>Authorized Alice</span>
-        )}
-        {authCheck('read', 'bob_data') && (
-          <span className='text-blue-600 font-bold'>Authorized Bob</span>
+        {authCheck('read', target) && (
+          <span className='text-orange-600 font-bold'>Authorized {target}</span>
         )}
       </span>
     </>

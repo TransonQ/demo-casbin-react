@@ -1,12 +1,9 @@
 {
-    "alice": {
-        "read": ["alice_data"]
-    },
-    "bob": {
-        "read": ["bob_data"]
-    },
-    "admin": {
-        "read": ["alice_data", "bob_data"],
-        "write": ["alice_data", "bob_data"]
-    }
+  "list": [
+    "audit.vastai.io/traces",
+    "cluster.vastai.io/clusters",
+    "cloud.vastai.io/general-virtualmachines",
+    "bms.vastai.io/nodes"
+  ],
+  "get": ["subcluster.vastai.io/datacenter"]
 }
