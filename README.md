@@ -45,6 +45,7 @@ src/
 - **`src/App.tsx`**: 应用的主入口组件，包含用户角色选择和权限演示。
 - **`src/CasbinDemo.tsx`**: Casbin 权限管理的示例组件。
 - **`src/hooks/useAuthStore.ts`**: 自定义 Hook，用于管理用户角色状态。
+- **`src/hooks/useFetchAuth`**: 封装 swr hook, 用户关于异步请求状态。
 - **`src/permissions.json`**: 权限配置文件。
 - **`src/App.css`**: 应用的样式文件，使用 TailwindCSS。
 
