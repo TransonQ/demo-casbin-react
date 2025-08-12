@@ -7,7 +7,7 @@ interface AuthState {
   authCheck: (act: string, obj: string) => boolean
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>()((set, get) => ({
   auth: undefined,
   setAuth: (permissions) => {
     const auth = new Authorizer('manual')
